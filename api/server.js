@@ -3,31 +3,15 @@
 // BREAK UP THIS MONOLITHIC FILE USING ROUTES
 const express = require('express');
 const adopter_router = require('./adopters/adopters-router');
+const dogs_router = require('./dogs/dogs-router');
 
 const server = express();
 
 server.use(express.json());
 server.use('/api/adopters', adopter_router);
+server.use('api/dogs', dogs_router);
 
-const Dog = require('./dogs/dogs-model');
 
-// DOGS ENDPOINTS
-// DOGS ENDPOINTS
-// DOGS ENDPOINTS
-server.get('/api/dogs', (req, res) => {
-  Dog.find()
-    .then(dogs => {
-      res.status(200).json(dogs);
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ message: 'Error retrieving the dogs' });
-    });
-});
-
-// OTHER ENDPOINTS
-// OTHER ENDPOINTS
-// OTHER ENDPOINTS
 server.get('/', (req, res) => {
   res.send(`
     <h2>Shelter API</h>
